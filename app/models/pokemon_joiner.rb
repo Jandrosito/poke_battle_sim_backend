@@ -1,0 +1,2 @@
+class PokemonJoiner < ApplicationRecord
+end
