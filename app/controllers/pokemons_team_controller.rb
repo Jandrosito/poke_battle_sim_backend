@@ -1,35 +1,41 @@
 class PokemonsTeamController < ApplicationController
     def index
-        pokemonteams = PokemonTeam.all 
-        render json: pokemonteams
+        pokemonsteam = PokemonTeam.all 
+        render json: pokemonsteam, include: 'pokemon_joiners'
     end
 
     def show
         pokemonteam = PokemonTeam.find(params[:id])
-        render json: pokemonteam
+        render json: pokemonteam, include: 'pokemon_joiners'
     end
 
     def new 
         pokemonteam = PokemonTeam.new
     end
 
-    def create 
-        pokemonteam = User.create(username: user_params[:username])
-        render json: user
+    def create
+        pokemons_team = PokemonTeam.create(team_params)
+        render json: pokemons_team
     end
 
     def destroy
-        user = User.find(params[:id])
-        user.destroy
+        pokemonteam = PokemonTeam.find(params[:id])
+        pokemonteam.destroy
     end
 
     def edit
-        user = User.find(params[:id])
+        pokemonteam = PokemonTeam.find(params[:id])
     end
 
     def update
-        user = User.find(params[:id])
-        user.update(user_params)
+        pokemonteam = PokemonTeam.find(params[:id])
+        pokemonteam.update(team_params)
         render json: user
+    end
+
+    private
+
+    def team_params
+        params.require(:pokemons_team).permit(:user_id)
     end
 end

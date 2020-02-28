@@ -1,7 +1,7 @@
 class CreatePokemonTeams < ActiveRecord::Migration[6.0]
   def change
     create_table :pokemon_teams do |t|
-      t.string :team
+      t.integer :user_id
 
       t.timestamps
     end
