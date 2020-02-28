@@ -1,5 +1,5 @@
 class PokemonTeam < ApplicationRecord
-    serialize :team, Array
     belongs_to :user
-    has_many :pokemons, through: :pokemonjoiner
+    has_many :pokemon_joiners, :dependent => :delete_all
+    has_many :pokemons, through: :pokemon_joiners
 end
