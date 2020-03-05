@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_181402) do
     t.string "poke_type"
     t.text "sprites"
     t.text "stats"
+    t.integer "battlehp"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

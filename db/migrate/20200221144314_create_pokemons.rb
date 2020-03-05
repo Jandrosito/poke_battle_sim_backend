@@ -6,6 +6,7 @@ class CreatePokemons < ActiveRecord::Migration[6.0]
       t.string :poke_type
       t.text :sprites
       t.text :stats
+      t.integer :battlehp
 
       t.timestamps
     end

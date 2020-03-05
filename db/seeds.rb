@@ -19,9 +19,7 @@ poke_data = []
 
 parsed_poke_data = poke_data.map{|data| JSON.parse(data)}
 
-poke_moves_data = parsed_poke_data.map{|stuff| stuff["moves"].sample(4).map{|data| RestClient.get data["move"]["url"]}}
-
-parsed_poke_moves_data = poke_moves_data.map{|data| data.map{|deep_data| JSON.parse(deep_data)}}
+parsed_poke_moves_data = parsed_poke_data.map{|stuff| (stuff["moves"].sample(4).map{|data| JSON.parse(RestClient.get data["move"]["url"])})}
 
 poke_names = parsed_poke_name_data.map{|data| data["name"]}
 
@@ -33,4 +31,4 @@ sprites = parsed_poke_data.map{|stuff| {"backimg": stuff['sprites']['back_defaul
 
 stats = parsed_poke_data.map{|stuff| stuff['stats'].map{|stat| {"name": stat["stat"]["name"], "value": stat['base_stat']}}}
 
-poke_names.map{|name| Pokemon.create("name": name, "moves": moves[poke_names.index(name)], "poke_type": poke_type[poke_names.index(name)], "sprites": sprites[poke_names.index(name)], "stats": stats[poke_names.index(name)])}
+poke_names.map{|name| Pokemon.create("name": name, "moves": moves[poke_names.index(name)], "poke_type": poke_type[poke_names.index(name)], "sprites": sprites[poke_names.index(name)], "stats": stats[poke_names.index(name)], "battlehp": stats[poke_names.index(name)][5][:value])}
